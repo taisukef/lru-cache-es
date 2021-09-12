@@ -1,18 +1,25 @@
-# lru cache es
+# lru cache
 
-A cache object that deletes the least-recently-used items. (ES module version)
+A cache object that deletes the least-recently-used items.
 
+[![Build Status](https://travis-ci.org/isaacs/node-lru-cache.svg?branch=master)](https://travis-ci.org/isaacs/node-lru-cache) [![Coverage Status](https://coveralls.io/repos/isaacs/node-lru-cache/badge.svg?service=github)](https://coveralls.io/github/isaacs/node-lru-cache)
+
+## Installation:
+
+```javascript
+npm install lru-cache --save
+```
 
 ## Usage:
 
 ```javascript
-import { LRUCache } from "https://taisukef.github.io/lru-cache-es/LRUCache.js";
-const options = { max: 500
+var LRU = require("lru-cache")
+  , options = { max: 500
               , length: function (n, key) { return n * 2 + key.length }
               , dispose: function (key, n) { n.close() }
-              , maxAge: 1000 * 60 * 60 };
-const cache = new LRUCache(options);
-const otherCache = new LRUCache(50); // sets just the max size
+              , maxAge: 1000 * 60 * 60 }
+  , cache = new LRU(options)
+  , otherCache = new LRU(50) // sets just the max size
 
 cache.set("key", "value")
 cache.get("key") // "value"
