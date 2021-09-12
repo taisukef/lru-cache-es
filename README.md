@@ -7,10 +7,12 @@ A cache object that deletes the least-recently-used items. (ES module version)
 
 ```javascript
 import { LRUCache } from "https://taisukef.github.io/lru-cache-es/LRUCache.js";
-const options = { max: 500
-              , length: function (n, key) { return n * 2 + key.length }
-              , dispose: function (key, n) { n.close() }
-              , maxAge: 1000 * 60 * 60 };
+const options = {
+  max: 500,
+  length: function (n, key) { return n * 2 + key.length },
+  dispose: function (key, n) { /*n.close()*/ },
+  maxAge: 1000 * 60 * 60
+};
 const cache = new LRUCache(options);
 const otherCache = new LRUCache(50) // sets just the max size
 
@@ -20,14 +22,14 @@ cache.get("key") // "value"
 // non-string keys ARE fully supported
 // but note that it must be THE SAME object, not
 // just a JSON-equivalent object.
-var someObject = { a: 1 }
+const someObject = { a: 1 }
 cache.set(someObject, 'a value')
 // Object keys are not toString()-ed
 cache.set('[object Object]', 'a different value')
-assert.equal(cache.get(someObject), 'a value')
+console.log(cache.get(someObject), "==", 'a value')
 // A similar object with same keys/values won't work,
 // because it's a different object identity
-assert.equal(cache.get({ a: 1 }), undefined)
+console.log(cache.get({ a: 1 }), "==", undefined)
 
 cache.reset()    // empty the cache
 ```
