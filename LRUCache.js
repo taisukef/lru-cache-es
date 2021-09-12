@@ -1,7 +1,5 @@
-'use strict'
-
 // A linked list to keep track of recently-used-ness
-const Yallist = require('yallist')
+import { Yallist } from "https://taisukef.github.io/yallist-es/Yallist.js";
 
 const MAX = Symbol('max')
 const LENGTH = Symbol('length')
@@ -331,4 +329,4 @@ const forEachStep = (self, fn, node, thisp) => {
     fn.call(thisp, hit.value, hit.key, self)
 }
 
-module.exports = LRUCache
+export { LRUCache };
